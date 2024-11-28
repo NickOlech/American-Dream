@@ -24,3 +24,109 @@ Married_W_Children <- read_excel("C:/Users/nicko/OneDrive/Desktop/Github/Economi
 All_W_Children <- read_excel("C:/Users/nicko/OneDrive/Desktop/Github/Economics Analysis/American-Dream/Poverty Excel Sheets/All Families with Children below Poverty.xlsx")
 ```
 
+Look For Trends across time as expressed as percentages
+
+First for all families living below the poverty line with children
+```{r}
+library(ggplot2)
+# Make sure data is numerical
+All_W_Children$`Poverty as %` <- as.numeric(All_W_Children$`Poverty as %`)
+
+# Filter data
+All_W_Children$Year <- gsub("\\(.*\\)", "", All_W_Children$Year)
+
+# Convert the filtered to numeric
+All_W_Children$Year <- as.numeric(All_W_Children$Year)
+
+# Create the plot
+ggplot(data = All_W_Children, aes(x = Year, y = `Poverty as %`)) +
+  geom_line(color = "red", size = 1) + 
+  labs(
+    x = "Years", 
+    y = "Poverty as a Percentage",
+    title = "Poverty for all Households with Children"
+  ) +
+  theme_minimal()
+
+```
+
+Now for married households 
+```{r}
+library(ggplot2)
+# Data here does not start until 1974
+Married_W_Children_Filtered <- Married_W_Children[Married_W_Children$Year >= 1974, ]
+
+# Make sure data is numerical
+Married_W_Children_Filtered$`Poverty as %` <- as.numeric(Married_W_Children_Filtered$`Poverty as %`)
+
+# Filter data
+Married_W_Children_Filtered$Year <- gsub("\\(.*\\)", "", Married_W_Children_Filtered$Year)
+
+# Convert the filtered to numeric
+Married_W_Children_Filtered$Year <- as.numeric(Married_W_Children_Filtered$Year)
+
+# Create the plot
+ggplot(data = Married_W_Children_Filtered, aes(x = Year, y = `Poverty as %`)) +
+  geom_line(color = "blue", size = 1) + 
+  labs(
+    x = "Years", 
+    y = "Poverty as a Percentage",
+    title = "Poverty for all Married Households with Children"
+  ) +
+  theme_minimal()
+
+```
+Now for single father households
+```{r}
+library(ggplot2)
+# Data here does not start until 1974
+Single_Father_Filtered <- Single_Father[Single_Father$Year >= 1974, ]
+
+# Make sure data is numerical
+Single_Father_Filtered$`Poverty as %` <- as.numeric(Single_Father_Filtered$`Poverty as %`)
+
+# Filter data
+Single_Father_Filtered$Year <- gsub("\\(.*\\)", "", Single_Father_Filtered$Year)
+
+# Convert the filtered to numeric
+Single_Father_Filtered$Year <- as.numeric(Single_Father_Filtered$Year)
+
+# Create the plot
+ggplot(data = Single_Father_Filtered, aes(x = Year, y = `Poverty as %`)) +
+  geom_line(color = "black", size = 1) + 
+  labs(
+    x = "Years", 
+    y = "Poverty as a Percentage",
+    title = "Poverty for Single Father Households (with Children)"
+  ) +
+  theme_minimal()
+
+```
+Now for single mother households
+```{r}
+library(ggplot2)
+# Make sure data is numerical
+Single_Mother$`Poverty as %` <- as.numeric(Single_Mother$`Poverty as %`)
+
+# Filter data
+Single_Mother$Year <- gsub("\\(.*\\)", "", Single_Mother$Year)
+
+# Convert the filtered to numeric
+Single_Mother$Year <- as.numeric(Single_Mother$Year)
+
+# Create the plot
+ggplot(data = Single_Mother, aes(x = Year, y = `Poverty as %`)) +
+  geom_line(color = "orange", size = 1) + 
+  labs(
+    x = "Years", 
+    y = "Poverty as a Percentage",
+    title = "Poverty for Single Mother Households (with Children)"
+  ) +
+  theme_minimal()
+
+```
+
+
+
+
+
