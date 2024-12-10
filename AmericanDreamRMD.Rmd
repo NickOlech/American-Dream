@@ -157,13 +157,13 @@ library(dplyr)
 library(ggplot2)
 
 out_of_pocket_filtered <- out_of_pocket %>%
-  mutate(`Out of Pocket Ratio` = (`Out of pocket`)/(`Out of pocket` + `Health Insurance`))
+  mutate(`Out of Pocket Ratio` = (`Out of pocket`)/(`Out of pocket` + `Health Insurance` + `Investment`))
 
 ggplot(data = out_of_pocket_filtered, aes(x = Year, y = `Out of Pocket Ratio`)) +
   geom_line(color = "green") + 
   labs(
     x = "Years", 
-    y = "Ratio OOP:HC",
+    y = "Proportion OOP",
     title = "Money Paid out of Pocket"
   ) +
   theme_minimal(base_size = 13)
